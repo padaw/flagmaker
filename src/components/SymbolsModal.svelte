@@ -19,7 +19,7 @@
 </script>
 
 {#snippet header()}
-    Pick symbol
+    Pick a symbol
 {/snippet}
 
 <Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
@@ -44,8 +44,5 @@
     }
     button.active {
         @apply border-black;
-    }
-    button:not(.active):hover {
-        @apply border-gray-200;
     }
 </style>

@@ -13,6 +13,8 @@
         symbolColorHex,
         symbolCode,
         colors,
+        texts,
+        textColors,
     } = $props<{
         exitHandler: Function;
         choiceHandler: (idx: number) => void;
@@ -22,11 +24,13 @@
         symbolColorHex: string;
         fullScreenToggler: Function;
         fullScreenEnabled: boolean;
+        texts: string[];
+        textColors: number[];
     }>();
 </script>
 
 {#snippet header()}
-    Pick pattern
+    Pick a pattern
 {/snippet}
 
 <Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
@@ -36,6 +40,7 @@
                 class="w-full aspect-[3/2] border-2 transition-all"
                 style="font-size: .5em"
                 class:active={activeIdx === idx}
+                title={pattern.name}
                 onclick={() => {
                     choiceHandler(idx);
                 }}
@@ -45,6 +50,8 @@
                     {pattern}
                     {symbolCode}
                     {symbolColorHex}
+                    {texts}
+                    {textColors}
                 />
             </button>
         {/each}
@@ -57,8 +64,5 @@
     }
     button.active {
         @apply border-black;
-    }
-    button:not(.active):hover {
-        @apply border-gray-200;
     }
 </style>
