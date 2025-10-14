@@ -1,7 +1,8 @@
 <script lang="ts">
-    import Icon from "@iconify/svelte";
     import Modal from "./Modal.svelte";
-    import { symbolSet } from "../core";
+    import { patterns } from "../core";
+    import Flag from "./Flag.svelte";
+    import { resizedArray } from "../utils";
 
     let {
         exitHandler,
@@ -9,31 +10,43 @@
         activeIdx,
         fullScreenToggler,
         fullScreenEnabled,
+        symbolColorHex,
+        symbolCode,
+        colors,
     } = $props<{
         exitHandler: Function;
         choiceHandler: (idx: number) => void;
         activeIdx: number;
+        colors: number[];
+        symbolCode: string;
+        symbolColorHex: string;
         fullScreenToggler: Function;
         fullScreenEnabled: boolean;
     }>();
 </script>
 
 {#snippet header()}
-    Pick symbol
+    Pick pattern
 {/snippet}
 
 <Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
-    <div class="grid grid-cols-8 w-full grow">
-        {#each symbolSet as { code, name }, idx}
+    <div class="grid grid-cols-2 w-full grow">
+        {#each patterns as pattern, idx}
             <button
-                class="h-full w-full border-2 flex justify-center items-center py-2 hover:bg-gray-200 transition-all"
-                style="font-size: 2em"
+                class="w-full aspect-[3/2] border-2 transition-all"
+                style="font-size: .5em"
                 class:active={activeIdx === idx}
-                title={name}
                 onclick={() => {
                     choiceHandler(idx);
-                }}><Icon icon={code} /></button
+                }}
             >
+                <Flag
+                    colors={resizedArray(colors, pattern.colorCount)}
+                    {pattern}
+                    {symbolCode}
+                    {symbolColorHex}
+                />
+            </button>
         {/each}
     </div>
 </Modal>

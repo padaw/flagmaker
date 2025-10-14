@@ -1,38 +1,46 @@
 <script lang="ts">
-    import Icon from "@iconify/svelte";
-    import { palette, symbolSet } from "./core.svelte";
+    import { onMount } from "svelte";
+    import { resizedArray } from "./utils";
+    import { palette, patterns, symbolSet } from "./core";
     import PaletteModal from "./components/PaletteModal.svelte";
     import SymbolsModal from "./components/SymbolsModal.svelte";
     import FieldButton from "./components/FieldButton.svelte";
-    import { onMount } from "svelte";
+    import Flag from "./components/Flag.svelte";
+    import PatternsModal from "./components/PatternsModal.svelte";
 
-    let colors = $state([0, 1]);
+    let patternIdx = $state(0);
+    let colors = $state(resizedArray([], patterns[0].colorCount));
     let symbol = $state(0);
     let symbolColor = $state(palette.findIndex((p) => p.name === "White"));
     let fullScreenEnabled = $state(false);
 
-    let modal: "palette" | "symbols" | "symbol-palette" | undefined = $state();
+    let modal:
+        | "palette"
+        | "symbols"
+        | "symbol-palette"
+        | "patterns"
+        | undefined = $state();
     let activeColorSlot = $state(0);
+
+    $effect(() => {
+        if (patterns[patternIdx].colorCount != colors.length) {
+            colors = resizedArray(colors, patterns[patternIdx].colorCount);
+        }
+    });
 
     function setModal(name?: typeof modal) {
         modal = name;
     }
 
-    const modalExitHandler = () => setModal(undefined);
-
-    function colorChoiceHandler(idx: number) {
-        colors[activeColorSlot] = idx;
-        setModal();
+    function modalExitHandler() {
+        setModal(undefined);
     }
 
-    function symbolChoiceHandler(idx: number) {
-        symbol = idx;
-        setModal();
-    }
-
-    function symbolColorChoiceHandler(idx: number) {
-        symbolColor = idx;
-        setModal();
+    function choiceHandler(setter: (idx: number) => any) {
+        return (idx: number) => {
+            setter(idx);
+            setModal(undefined);
+        };
     }
 
     function toggleFullScreen() {
@@ -48,7 +56,31 @@
     });
 </script>
 
-<div class="flex flex-col gap-4 w-full lg:w-5/6 xl:w-2/3 2xl:w-1/3 max-h-full">
+<div class="flex flex-col gap-4 w-full lg:w-5/6 xl:w-2/3 2xl:w-5/12 max-h-full">
+    <div class="flex gap-4">
+        <FieldButton title="Pattern" onclick={() => setModal("patterns")}>
+            <span class="font-bold">Pattern: </span>
+            <span>{patterns[patternIdx].name}</span>
+        </FieldButton>
+        <FieldButton
+            title="Symbol"
+            style="flex-grow: 1"
+            onclick={() => setModal("symbols")}
+        >
+            <span class="font-bold">Symbol: </span>
+            <span>{symbolSet[symbol].name}</span>
+        </FieldButton>
+        <FieldButton
+            title="Symbol color"
+            style={`width: max-content; border-left-width: 1px`}
+            onclick={() => setModal("symbol-palette")}
+        >
+            <div
+                class="h-full aspect-[2/1] -mx-2"
+                style={`background: ${palette[symbolColor].hex}`}
+            ></div>
+        </FieldButton>
+    </div>
     <div class="flex gap-4 w-full">
         {#each colors as pIdx, i}
             <FieldButton
@@ -64,41 +96,24 @@
                     <span>{palette[pIdx].name}</span>
                 </div>
                 <div
-                    class="h-full aspect-[3/1] -mr-2"
+                    class="h-full aspect-[2/1] -mr-2"
                     style={`background: ${palette[pIdx].hex}`}
                 ></div>
             </FieldButton>
         {/each}
     </div>
-    <div class="flex gap-4">
-        <FieldButton
-            title="Selected symbol"
-            style="flex-grow: 1"
-            onclick={() => setModal("symbols")}
-        >
-            <span class="font-bold">Symbol: </span>
-            <span>{symbolSet[symbol].name}</span>
-        </FieldButton>
-        <FieldButton
-            title="Selected symbol"
-            style={`border-color: ${palette[symbolColor].hex}; width: max-content`}
-            onclick={() => setModal("symbol-palette")}
-        >
-            <div
-                class="h-full aspect-[3/1] -mx-2"
-                style={`background: ${palette[symbolColor].hex}`}
-            ></div>
-        </FieldButton>
-    </div>
     <main
-        class="bg-white aspect-[3/2] w-full border border-gray-600/60 shadow-xl shadow-gray-600/60 overflow-y-scroll"
+        class="bg-white aspect-[3/2] w-full border border-gray-600/60 shadow-xl shadow-gray-600/60"
+        class:overflow-y-scroll={!!modal}
         class:fullscreen={fullScreenEnabled}
     >
         {#if modal !== undefined}
             {#if modal === "palette"}
                 <PaletteModal
                     title={`Pick color ${activeColorSlot + 1}`}
-                    choiceHandler={colorChoiceHandler}
+                    choiceHandler={choiceHandler(
+                        (idx) => (colors[activeColorSlot] = idx),
+                    )}
                     exitHandler={modalExitHandler}
                     activeIdx={colors[activeColorSlot]}
                     {fullScreenEnabled}
@@ -106,40 +121,41 @@
                 />
             {:else if modal === "symbols"}
                 <SymbolsModal
-                    choiceHandler={symbolChoiceHandler}
+                    choiceHandler={choiceHandler((idx) => (symbol = idx))}
                     exitHandler={modalExitHandler}
                     activeIdx={symbol}
                     {fullScreenEnabled}
                     fullScreenToggler={toggleFullScreen}
                 />
-            {:else}
+            {:else if modal === "symbol-palette"}
                 <PaletteModal
                     title="Pick symbol color"
-                    choiceHandler={symbolColorChoiceHandler}
+                    choiceHandler={choiceHandler((idx) => (symbolColor = idx))}
                     exitHandler={modalExitHandler}
                     activeIdx={symbolColor}
                     {fullScreenEnabled}
                     fullScreenToggler={toggleFullScreen}
                 />
+            {:else}
+                <PatternsModal
+                    choiceHandler={choiceHandler((idx) => (patternIdx = idx))}
+                    exitHandler={modalExitHandler}
+                    activeIdx={patternIdx}
+                    {colors}
+                    symbolCode={symbolSet[symbol].code}
+                    symbolColorHex={palette[symbolColor].hex}
+                    {fullScreenEnabled}
+                    fullScreenToggler={toggleFullScreen}
+                />
             {/if}
         {:else}
-            <button
-                class="flex flex-col h-full w-full relative"
-                aria-label="Current flag"
-                onclick={toggleFullScreen}
-            >
-                <div
-                    class="flag-symbol absolute flex justify-center items-center text-white w-full h-full"
-                    style={`color: ${palette[symbolColor].hex}; font-size: 10em`}
-                >
-                    <Icon icon={symbolSet[symbol].code} />
-                </div>
-                {#each colors as pIdx}
-                    <div
-                        class="grow w-full"
-                        style={`background: ${palette[pIdx].hex}`}
-                    ></div>
-                {/each}
+            <button class="w-full h-full" onclick={toggleFullScreen}>
+                <Flag
+                    {colors}
+                    pattern={patterns[patternIdx]}
+                    symbolCode={symbolSet[symbol].code}
+                    symbolColorHex={palette[symbolColor].hex}
+                />
             </button>
         {/if}
     </main>

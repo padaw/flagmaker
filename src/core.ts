@@ -64,3 +64,32 @@ export const symbolSet = [
     { code: "material-symbols:shield", name: "Shield" },
     { code: "material-symbols:home", name: "Home" },
 ];
+
+export const patterns: Pattern[] = [
+    {
+        name: "2 Colors Horizontal",
+        props: ["horizontal"],
+        colorCount: 2,
+    },
+    {
+        name: "3 Colors Horizontal",
+        props: ["horizontal"],
+        colorCount: 3,
+    },
+    {
+        name: "2 Colors Vertical",
+        props: ["vertical"],
+        colorCount: 2,
+    },
+    {
+        name: "3 Colors Vertical",
+        props: ["vertical"],
+        colorCount: 3,
+    },
+];
+
+export type Pattern = {
+    name: string;
+    colorCount: number;
+    props: string[];
+};

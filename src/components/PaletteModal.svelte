@@ -1,6 +1,6 @@
 <script lang="ts">
     import Modal from "./Modal.svelte";
-    import { palette } from "../core.svelte";
+    import { palette } from "../core";
 
     let {
         title,
