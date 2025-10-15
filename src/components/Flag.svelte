@@ -14,30 +14,37 @@
 </script>
 
 <div
-    class="flex flex-col h-full w-full relative"
+    class="flex h-full w-full relative"
     class:flex-row={pattern.props.includes("vertical")}
     class:flex-col={pattern.props.includes("horizontal")}
 >
-    <div
-        class="absolute flex flex-col justify-evenly items-center w-full h-full"
-    >
+    <div class="absolute flex flex-col items-center w-full h-full">
         <div class="h-full flex items-center">
-            <h1 class="font-bold" style={`color: ${palette[textColors[0]].hex}`}>
+            <h1
+                class="font-bold"
+                style={`color: ${palette[textColors[0]].hex}`}
+            >
                 {texts[0]}
             </h1>
         </div>
-        <div class="h-full flex items-center" style={`color: ${symbolColorHex}; font-size: 10em`}>
+        <div
+            class="h-full flex items-center"
+            style={`color: ${symbolColorHex}; font-size: 10em`}
+        >
             <Icon icon={symbolCode} />
         </div>
         <div class="h-full flex items-center">
-            <h2 class="font-bold" style={`color: ${palette[textColors[1]].hex}`}>
+            <h2
+                class="font-bold"
+                style={`color: ${palette[textColors[1]].hex}`}
+            >
                 {texts[1]}
             </h2>
         </div>
     </div>
     {#each colors as pIdx}
         <div
-            class="grow w-full"
+            class="grow w-full h-full"
             style={`background: ${palette[pIdx].hex}`}
         ></div>
     {/each}
@@ -46,7 +53,7 @@
 <style>
     h1,
     h2 {
-        text-shadow: 0px 1px 1px #000;
+        text-shadow: 0px 1px 1px rgba(0,0,0,.5);
     }
 
     h1 {
@@ -54,6 +61,6 @@
     }
 
     h2 {
-        font-size: 1.5em;
+        font-size: 1.75em;
     }
 </style>

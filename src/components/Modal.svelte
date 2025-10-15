@@ -25,7 +25,7 @@
     });
 </script>
 
-<div class="flex flex-col gap-4 p-4 grow w-full h-full">
+<div class="flex flex-col gap-4 p-4 grow w-full h-max">
     <div class="flex justify-between items-center">
         {@render header()}
         <div class="flex gap-4" style="font-size: 1.25em">

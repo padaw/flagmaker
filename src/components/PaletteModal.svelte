@@ -24,10 +24,13 @@
 {/snippet}
 
 <Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
-    <div class="grid grid-cols-4 grid-rows-4 grid-flow-row w-full grow">
+    <div
+        class="grid grid-cols-6 grid-flow-row w-full grow"
+        class:large={fullScreenEnabled}
+    >
         {#each palette as { hex, name }, idx}
             <button
-                class="h-full w-full border-2 transition-all"
+                class="w-full border-2 transition-all"
                 style={`background: ${hex}`}
                 class:active={activeIdx === idx}
                 title={name}
@@ -40,6 +43,12 @@
 </Modal>
 
 <style>
+    div.large button {
+        @apply aspect-[3/2];
+    }
+    div:not(.large) button {
+        @apply aspect-[4/3];
+    }
     button {
         @apply border-transparent;
     }

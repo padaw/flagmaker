@@ -71,17 +71,17 @@
             onclick={() => setModal("patterns")}
             active={modal === "patterns"}
         >
-            <span class="font-bold">Pattern: </span>
+            <span class="font-bold">Pattern:</span>
             <span>{patterns[patternIdx].name}</span>
         </FieldButton>
-        <div class="w-full flex gap-2">
+        <div class="w-full flex gap-1">
             <FieldButton
                 title="Symbol"
                 onclick={() => setModal("symbols")}
                 active={modal === "symbols"}
             >
-                <div class="grow">
-                    <span class="font-bold">Symbol: </span>
+                <div class="flex gap-2 grow">
+                    <span class="font-bold">Symbol:</span>
                     <span>{symbolSet[symbol].name}</span>
                 </div>
             </FieldButton>
@@ -100,7 +100,7 @@
     </div>
     <div class="grid grid-cols-2 gap-4">
         {#each texts as _, i}
-            <div class="flex gap-2">
+            <div class="flex gap-1">
                 <FieldInput
                     label={`Text ${i + 1}`}
                     handler={(val) => (texts[i] = val)}
@@ -133,8 +133,8 @@
                     setModal("palette");
                 }}
             >
-                <div class="grow">
-                    <span class="font-bold">{i + 1}: </span>
+                <div class="grow flex gap-2">
+                    <span class="font-bold">{i + 1}:</span>
                     <span>{palette[pIdx].name}</span>
                 </div>
                 <div
@@ -220,6 +220,6 @@
 
 <style>
     main.fullscreen {
-        @apply fixed top-0 left-0 w-dvw max-h-dvh border-0 2xl:text-4xl;
+        @apply fixed top-0 left-0 w-dvw max-h-dvh border-0 2xl:text-3xl;
     }
 </style>

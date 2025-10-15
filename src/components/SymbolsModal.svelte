@@ -23,11 +23,15 @@
 {/snippet}
 
 <Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
-    <div class="grid grid-cols-8 w-full grow">
+    <div
+        class="grid grid-flow-row w-full grow"
+        class:grid-cols-8={!fullScreenEnabled}
+        class:grid-cols-12={fullScreenEnabled}
+    >
         {#each symbolSet as { code, name }, idx}
             <button
-                class="h-full w-full border-2 flex justify-center items-center py-2 hover:bg-gray-200 transition-all"
-                style="font-size: 2em"
+                class="w-full border-2 flex justify-center items-center hover:bg-gray-200 transition-all"
+                style="font-size: 2em; padding: .5em 0;"
                 class:active={activeIdx === idx}
                 title={name}
                 onclick={() => {
