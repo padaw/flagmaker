@@ -39,6 +39,7 @@ export const palette = [
 ];
 
 export const symbolSet = [
+    { code: "empty", name: "None" },
     // 🏆 ACHIEVEMENT & SUCCESS
     // Symbols representing goals, awards, and accomplishments
     { code: "material-symbols:star", name: "Star" },
@@ -46,8 +47,8 @@ export const symbolSet = [
     { code: "material-symbols:workspace-premium", name: "Award" },
     { code: "material-symbols:emoji-events", name: "Winner Cup" },
     { code: "material-symbols:favorite", name: "Heart" },
-    { code: "vaadin:handshake", name: "Handshake" },
-    { code: "material-symbols:heart-plus", name: "Heart with Plus" },
+    { code: "ri:hand-heart-fill", name: "Heart in Hand" },
+    { code: "fluent:handshake-24-filled", name: "Handshake" },
     { code: "material-symbols:auto-awesome", name: "Sparkles" },
     { code: "material-symbols:celebration", name: "Celebration" },
     { code: "material-symbols:diamond", name: "Diamond" },
@@ -66,8 +67,10 @@ export const symbolSet = [
     { code: "material-symbols:brush", name: "Paintbrush" },
     { code: "material-symbols:music-note", name: "Music Note" },
     { code: "material-symbols:theater-comedy", name: "Comedy Masks" },
-    { code: "material-symbols:camera", name: "Camera" },
+    { code: "bi:camera-fill", name: "Camera" },
     { code: "material-symbols:headphones", name: "Headphones" },
+    { code: "material-symbols:sports-esports", name: "Game Controller" },
+    { code: "ri:smartphone-fill", name: "Smartphone" },
 
     // 🌍 NATURE & WORLD
     // Symbols representing nature, environment, and exploration
@@ -94,8 +97,9 @@ export const symbolSet = [
     { code: "mdi:dog", name: "Dog Face" },
     { code: "fa6-solid:cat", name: "Cat" },
     { code: "mdi:cat", name: "Cat Face" },
-    { code: "game-icons:saber-toothed-cat-head", name: "Wild Cat" },
     { code: "material-symbols:pets", name: "Paw Print" },
+    { code: "game-icons:saber-toothed-cat-head", name: "Wild Cat" },
+    { code: "game-icons:spiked-dragon-head", name: "Dragon Head" },
 
     // ⚽ SPORTS & ACTIVITIES
     // Symbols for sports, games, and physical activities
@@ -108,12 +112,6 @@ export const symbolSet = [
     { code: "material-symbols:downhill-skiing", name: "Skier" },
     { code: "material-symbols:scuba-diving", name: "Scuba Diver" },
     { code: "ph:person-simple-swim-fill", name: "Swimmer" },
-
-    // 🚀 TECHNOLOGY & MODERN LIFE
-    // Symbols representing technology, games, and modern interests
-    { code: "material-symbols:sports-esports", name: "Game Controller" },
-    { code: "ri:smartphone-fill", name: "Smartphone" },
-    { code: "material-symbols:play-arrow", name: "Play Arrow" },
 
     // 🏠 OBJECTS & PLACES
     // Everyday objects, buildings, and locations
@@ -133,13 +131,12 @@ export const symbolSet = [
     { code: "emojione-monotone:red-apple", name: "Apple" },
     { code: "game-icons:strawberry", name: "Strawberry" },
 
-    // 🔷 SHAPES & MYTHICAL
-    // Basic shapes and fantasy/mythical creatures
+    // 🔷 SHAPES 
+    // Basic shapes 
     { code: "material-symbols:circle", name: "Circle" },
     { code: "material-symbols:square", name: "Square" },
     { code: "mdi:triangle", name: "Triangle" },
-    { code: "simple-icons:dragonframe", name: "Dragon Frame" },
-    { code: "game-icons:spiked-dragon-head", name: "Dragon Head" }
+    { code: "material-symbols:play-arrow", name: "Play Arrow" },
 ];
 
 export const patterns: Pattern[] = [

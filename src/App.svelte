@@ -57,8 +57,16 @@
 
     onMount(() => {
         window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && fullScreenEnabled) {
+            const el = document.activeElement;
+            if (el !== document.body && !el?.classList.contains("field-btn")) {
+                return;
+            }
+            if (e.key === "f" || (e.key === "Escape" && fullScreenEnabled)) {
                 toggleFullScreen();
+                return;
+            }
+            if (e.key === "Escape" && modal !== undefined) {
+                setModal(undefined);
             }
         });
     });

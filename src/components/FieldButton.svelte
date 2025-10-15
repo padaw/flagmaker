@@ -12,7 +12,7 @@
 </script>
 
 <button
-    class="transition-all overflow-hidden bg-white flex justify-between w-full shadow-lg items-center h-8 border border-gray-600/30 border-l-8 rounded text-start px-2"
+    class="field-btn transition-all overflow-hidden bg-white flex justify-between w-full shadow-lg items-center h-8 border border-gray-600/30 border-l-8 rounded text-start px-2"
     class:active
     {style}
     {title}

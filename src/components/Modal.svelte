@@ -29,14 +29,14 @@
     <div class="flex justify-between items-center">
         {@render header()}
         <div class="flex gap-4" style="font-size: 1.25em">
-            <button title="Toggle Full Screen" onclick={fullScreenToggler}
+            <button title="Toggle Full Screen (F)" onclick={fullScreenToggler}
                 ><Icon
                     icon={fullScreenEnabled
                         ? "mdi:fullscreen-exit"
                         : "mdi:fullscreen"}
                 /></button
             >
-            <button title="Cancel" onclick={exitHandler}
+            <button title="Cancel (Esc)" onclick={exitHandler}
                 ><Icon icon="mdi:close-outline" /></button
             >
         </div>
