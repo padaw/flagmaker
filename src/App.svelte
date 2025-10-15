@@ -63,7 +63,6 @@
             }
             if (e.key === "f" || (e.key === "Escape" && fullScreenEnabled)) {
                 toggleFullScreen();
-                return;
             }
             if (e.key === "Escape" && modal !== undefined) {
                 setModal(undefined);
