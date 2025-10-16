@@ -1,19 +1,10 @@
 <script lang="ts">
+    import { current } from "../core.svelte";
+    import { colors } from "../definitions";
     import Modal from "./Modal.svelte";
-    import { palette } from "../core";
 
-    let {
-        title,
-        exitHandler,
-        choiceHandler,
-        activeIdx,
-        fullScreenToggler,
-        fullScreenEnabled,
-    } = $props<{
+    let { title, choiceHandler, activeIdx } = $props<{
         title: string;
-        exitHandler: Function;
-        fullScreenToggler: Function;
-        fullScreenEnabled: boolean;
         choiceHandler: (idx: number) => void;
         activeIdx: number;
     }>();
@@ -23,12 +14,12 @@
     {title}
 {/snippet}
 
-<Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
+<Modal {header}>
     <div
         class="grid grid-cols-6 grid-flow-row w-full grow"
-        class:large={fullScreenEnabled}
+        class:large={current.inFullScreen}
     >
-        {#each palette as { hex, name }, idx}
+        {#each colors as { hex, name }, idx}
             <button
                 class="w-full border-2 transition-all"
                 style={`background: ${hex}`}

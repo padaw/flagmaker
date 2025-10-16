@@ -1,20 +1,12 @@
 <script lang="ts">
     import Icon from "@iconify/svelte";
     import Modal from "./Modal.svelte";
-    import { symbolSet } from "../core";
+    import { current } from "../core.svelte";
+    import { symbols } from "../definitions";
 
-    let {
-        exitHandler,
-        choiceHandler,
-        activeIdx,
-        fullScreenToggler,
-        fullScreenEnabled,
-    } = $props<{
-        exitHandler: Function;
+    let { choiceHandler, activeIdx } = $props<{
         choiceHandler: (idx: number) => void;
         activeIdx: number;
-        fullScreenToggler: Function;
-        fullScreenEnabled: boolean;
     }>();
 </script>
 
@@ -22,13 +14,13 @@
     Pick a symbol
 {/snippet}
 
-<Modal {exitHandler} {header} {fullScreenEnabled} {fullScreenToggler}>
+<Modal {header}>
     <div
         class="grid grid-flow-row w-full grow"
-        class:grid-cols-8={!fullScreenEnabled}
-        class:grid-cols-12={fullScreenEnabled}
+        class:grid-cols-8={!current.inFullScreen}
+        class:grid-cols-12={current.inFullScreen}
     >
-        {#each symbolSet as { code, name }, idx}
+        {#each symbols as { code, name }, idx}
             <button
                 class="w-full border-2 flex justify-center items-center hover:bg-gray-200 transition-all"
                 style="font-size: 2em; padding: .5em 0;"

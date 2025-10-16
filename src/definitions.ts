@@ -1,44 +1,44 @@
-export const palette = [
+export const colors: ColorProps[] = [
     // Reds & Pinks
     { hex: "#E63946", name: "Vibrant Red" },
     { hex: "#DC2626", name: "Bold Red" },
     { hex: "#FF6B6B", name: "Coral Pink" },
     { hex: "#F15BB5", name: "Bubblegum Pink" },
     { hex: "#EC4899", name: "Hot Pink" },
-    
+
     // Oranges
     { hex: "#FB5607", name: "Bright Orange" },
     { hex: "#FF9E6D", name: "Peach" },
-    
+
     // Yellows
     { hex: "#FFD166", name: "Sunny Yellow" },
     { hex: "#FFBE0B", name: "Golden Yellow" },
     { hex: "#EAB308", name: "Lemon Yellow" },
-    
+
     // Greens
     { hex: "#06D6A0", name: "Grass Green" },
     { hex: "#00BB5D", name: "Emerald Green" },
     { hex: "#16A34A", name: "Forest Green" },
-    
+
     // Blues
     { hex: "#118AB2", name: "Strong Blue" },
     { hex: "#3A86FF", name: "Bright Blue" },
     { hex: "#A2D2FF", name: "Sky Blue" },
     { hex: "#0369A1", name: "Deep Blue" },
-    
+
     // Purples
     { hex: "#5A189A", name: "Deep Purple" },
     { hex: "#7209B7", name: "Electric Purple" },
     { hex: "#8338EC", name: "Royal Purple" },
     { hex: "#C77DFF", name: "Lavender" },
-    
+
     // Neutrals
     { hex: "#000000", name: "Black" },
     { hex: "#FFFFFF", name: "White" },
-    { hex: "#6A687A", name: "Warm Gray" }
+    { hex: "#6A687A", name: "Warm Gray" },
 ];
 
-export const symbolSet = [
+export const symbols: SymbolProps[] = [
     { code: "empty", name: "None" },
     // 🏆 ACHIEVEMENT & SUCCESS
     // Symbols representing goals, awards, and accomplishments
@@ -131,15 +131,15 @@ export const symbolSet = [
     { code: "emojione-monotone:red-apple", name: "Apple" },
     { code: "game-icons:strawberry", name: "Strawberry" },
 
-    // 🔷 SHAPES 
-    // Basic shapes 
+    // 🔷 SHAPES
+    // Basic shapes
     { code: "material-symbols:circle", name: "Circle" },
     { code: "material-symbols:square", name: "Square" },
     { code: "mdi:triangle", name: "Triangle" },
     { code: "material-symbols:play-arrow", name: "Play Arrow" },
 ];
 
-export const patterns: Pattern[] = [
+export const patterns: PatternProps[] = [
     {
         name: "2 Colors Horizontal",
         props: ["horizontal"],
@@ -162,7 +162,17 @@ export const patterns: Pattern[] = [
     },
 ];
 
-export type Pattern = {
+export type ColorProps = {
+    hex: string;
+    name: string;
+};
+
+export type SymbolProps = {
+    code: string;
+    name: string;
+};
+
+export type PatternProps = {
     name: string;
     colorCount: number;
     props: string[];
