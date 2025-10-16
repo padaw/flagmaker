@@ -1,10 +1,19 @@
 <script lang="ts">
-    let { label, handler } = $props<{
+    let { label, handler, initialValue } = $props<{
         label: string;
         handler: (val: string) => any;
+        initialValue?: string;
     }>();
 
-    let text = $state("");
+    let init = initialValue ?? "";
+    let text = $state(init);
+
+    $effect(() => {
+        if (initialValue !== init) {
+            text = initialValue;
+            init = initialValue;
+        }
+    });
 
     // idk?
     $effect(() => {

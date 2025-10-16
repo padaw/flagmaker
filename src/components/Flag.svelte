@@ -46,7 +46,7 @@
     class:flex-col={pattern.props.includes("horizontal")}
     bind:this={el}
 >
-    <div class="absolute flex flex-col items-center w-full h-full">
+    <div class="absolute flex flex-col items-center w-full h-full overflow-hidden">
         <div class="h-full flex items-center">
             <h1
                 class="font-bold"
@@ -81,6 +81,6 @@
 <style>
     h1,
     h2 {
-        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+        text-shadow: 0px 1px 1px #000;
     }
 </style>

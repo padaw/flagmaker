@@ -17,8 +17,7 @@
 <Modal {header}>
     <div
         class="grid grid-flow-row w-full grow"
-        class:grid-cols-8={!current.inFullScreen}
-        class:grid-cols-12={current.inFullScreen}
+        class:fullscreen={current.inFullScreen}
     >
         {#each symbols as { code, name }, idx}
             <button
@@ -40,5 +39,12 @@
     }
     button.active {
         @apply border-black;
+    }
+    div.fullscreen {
+        @apply grid-cols-12;
+        font-size: 1.5em;
+    }
+    div:not(.fullscreen) {
+        @apply grid-cols-8;
     }
 </style>
